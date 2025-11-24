@@ -1,4 +1,4 @@
-main.bicep
+bicep/Back.json
 node_modules/
 dist/
 build/
@@ -10,7 +10,16 @@ build/
 .env.development.local
 .env.test.local
 .env.production.local
-
+bicep/
+blob.json
+db.json
+front.json
+bicep/Blob.json
+bicep/DB.json
+bicep/Front.json
+bicep/paramBack.json
+bicep/paramDB.json
+bicep/paramFront.json
 
 .DS_Store
 Thumbs.db

@@ -1,35 +1,56 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Login from "./pages/Login";
+import Signup from "./pages/Signup";
+import Destination from "./pages/Destination";
+import ProtectedRoute from "./components/ProtectedRoute";
+import { AuthProvider } from "./context/AuthContext";
+import Swipes from "./pages/Swipes.jsx"
+import RouteResult from "./pages/RouteResult.jsx";
 
 function App() {
-  const [count, setCount] = useState(0)
+    return (
+        <AuthProvider>
+            <BrowserRouter>
+                <Routes>
+                    <Route path="/login" element={<Login />} />
+                    <Route path="/signup" element={<Signup />} />
 
-  return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+                    <Route
+                        path="/"
+                        element={
+                            <ProtectedRoute>
+
+                            </ProtectedRoute>
+                        }
+                    />
+                    <Route
+                        path="/destination"
+                        element={
+                            <ProtectedRoute>
+                                <Destination />
+                            </ProtectedRoute>
+                        }
+                    />
+                    <Route
+                        path="/swipes/:tripId"
+                        element={
+                            <ProtectedRoute>
+                                <Swipes />
+                            </ProtectedRoute>
+                        }
+                    />
+                    <Route
+                        path="/route/:tripId"
+                        element={
+                            <ProtectedRoute>
+                                <RouteResult />
+                            </ProtectedRoute>
+                        }
+                    />
+                </Routes>
+            </BrowserRouter>
+        </AuthProvider>
+    );
 }
 
-export default App
+export default App;
