@@ -32,6 +32,12 @@ jobs:
         run: |
           npm ci
           npm run build
+          
+      - name: Inspect build output
+        working-directory: ./frontend
+        run: |
+          echo "=== Contenido de frontend después del build ==="
+          ls -R .
 
       - name: Deploy to Azure Static Web Apps (skip Oryx)
         uses: Azure/static-web-apps-deploy@v1
@@ -42,5 +48,6 @@ jobs:
           skip_app_build: true               # EVITA ORYX
           app_location: "./frontend"
           app_artifact_location: "dist"       # YA COMPILADO
+
 
 
