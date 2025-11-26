@@ -1,15 +1,37 @@
 {
-  "navigationFallback": {
-    "rewrite": "/index.html",
-    "exclude": ["/assets/*", "/*.{css,scss,js,png,gif,ico,jpg,svg}"]
-  },
   "routes": [
     {
-      "route": "/api/*",
-      "allowedRoles": ["anonymous"]
+      "route": "/*",
+      "serve": "/index.html"
     }
   ],
-  "globalHeaders": {
-    "content-security-policy": "default-src 'self' https:; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline' 'unsafe-eval'"
+  "mimeTypes": {
+    ".js": "text/javascript",
+    ".mjs": "text/javascript",
+    ".jsx": "text/javascript",
+    ".json": "application/json",
+    ".css": "text/css",
+    ".svg": "image/svg+xml"
+  },
+  "security": {
+    "contentSecurityPolicy": {
+      "mode": "enforce",
+      "directives": {
+        "default-src": ["'self'"],
+        "script-src": [
+          "'self'",
+          "'unsafe-inline'",
+          "https://atlas.microsoft.com"
+        ],
+        "style-src": [
+          "'self'",
+          "'unsafe-inline'",
+          "https://atlas.microsoft.com"
+        ],
+        "img-src": ["'self'", "data:", "https://atlas.microsoft.com"],
+        "connect-src": ["'self'", "https://atlas.microsoft.com"],
+        "frame-src": ["'self'", "https://atlas.microsoft.com"]
+      }
+    }
   }
 }
