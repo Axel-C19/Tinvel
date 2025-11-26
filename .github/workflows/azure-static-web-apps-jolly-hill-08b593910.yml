@@ -47,7 +47,8 @@ jobs:
           action: upload
           skip_app_build: true               # EVITA ORYX
           app_location: "./frontend"
-          app_artifact_location: "dist"       # YA COMPILADO
+          app_artifact_location: "./frontend/dist"       # YA COMPILADO
+
 
 
 
