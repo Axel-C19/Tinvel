@@ -38,16 +38,13 @@ jobs:
           node-version: '20'
           cache: 'npm'
           cache-dependency-path: './frontend/package-lock.json'
-      - name: Build Vite frontend
-        working-directory: ./frontend
+      - name: Build frontend
         run: |
+          cd frontend
           npm ci
+          npm install esbuild --save-dev
           npm run build
-      - name: Inspect build output
-        working-directory: ./frontend
-        run: |
-          echo "=== Contenido de frontend después del build ==="
-          ls -R .
+          cp staticwebapp.config.json dist/ || true
       - name: Build And Deploy
         id: builddeploy
         uses: Azure/static-web-apps-deploy@v1
@@ -55,8 +52,9 @@ jobs:
           azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_ZEALOUS_DESERT_09F06490F }}
           action: "upload"
           skip_app_build: true
-          app_location: "./frontend/dist" 
-          api_location: "/backend/api" 
+          app_location: "frontend" 
+          api_location: "/backend/api"
+          app_artifact_location: "./frontend/dist"
           output_location: "build" 
           github_id_token: ${{ steps.idtoken.outputs.result }}
           
@@ -71,6 +69,7 @@ jobs:
         uses: Azure/static-web-apps-deploy@v1
         with:
           action: "close"
+
 
 
 
