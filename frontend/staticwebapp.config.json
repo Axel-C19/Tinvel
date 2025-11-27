@@ -1,7 +1,7 @@
 {
   "navigationFallback": {
     "rewrite": "/index.html",
-    "exclude": ["/assets/*", "/*.{css,scss,js,png,gif,ico,jpg,svg,woff,woff2,ttf,eot}"]
+    "exclude": ["/assets/*", "/*.{css,scss,js,mjs,json,png,gif,ico,jpg,svg,woff,woff2,ttf,eot}"]
   },
   "mimeTypes": {
     ".js": "text/javascript",
@@ -20,9 +20,30 @@
     ".eot": "application/vnd.ms-fontobject"
   },
   "globalHeaders": {
-    "Cache-Control": "public, max-age=31536000, immutable"
+    "content-security-policy": "default-src 'self' 'unsafe-inline' 'unsafe-eval' data: blob:;"
   },
   "routes": [
+    {
+      "route": "/assets/*.js",
+      "headers": {
+        "Content-Type": "text/javascript; charset=utf-8",
+        "Cache-Control": "public, max-age=31536000, immutable"
+      }
+    },
+    {
+      "route": "/assets/*.mjs",
+      "headers": {
+        "Content-Type": "text/javascript; charset=utf-8",
+        "Cache-Control": "public, max-age=31536000, immutable"
+      }
+    },
+    {
+      "route": "/assets/*.css",
+      "headers": {
+        "Content-Type": "text/css; charset=utf-8",
+        "Cache-Control": "public, max-age=31536000, immutable"
+      }
+    },
     {
       "route": "/assets/*",
       "headers": {
