@@ -43,12 +43,10 @@ jobs:
           azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_JOLLY_HILL_08B593910 }}
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           action: "upload"
-          skip_app_build: true  # Ya hicimos el build manualmente arriba
-          ###### Repository/Build Configurations ######
+          skip_app_build: true
           app_location: "./frontend/dist"      # Apunta directamente al dist ya buildeado
           api_location: ""                     # Vacío si no tienes Azure Functions API
-          output_location: ""                  # Vacío porque ya estamos en dist
-          ###### End of Repository/Build Configurations ######
+          output_location: "build"                  
 
   close_pull_request_job:
     if: github.event_name == 'pull_request' && github.event.action == 'closed'
@@ -61,3 +59,4 @@ jobs:
         with:
           azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_JOLLY_HILL_08B593910 }}
           action: "close"
+
