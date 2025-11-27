@@ -32,6 +32,11 @@ jobs:
         run: |
           npm ci
           npm run build
+
+      - name: Copy config to dist
+          run: |
+            cp frontend/staticwebapp.config.json frontend/dist/
+            ls -la frontend/dist/
           
       - name: Build And Deploy
         id: builddeploy
