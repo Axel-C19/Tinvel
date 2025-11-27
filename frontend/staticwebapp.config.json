@@ -1,24 +1,36 @@
 {
   "navigationFallback": {
     "rewrite": "/index.html",
-    "exclude": ["/assets/*", "/favicon.ico", "*.{css,scss,js,mjs,json,png,gif,ico,jpg,svg,woff,woff2,ttf,eot}"]
+    "exclude": ["/assets/*", "/*.{css,scss,js,png,gif,ico,jpg,svg,woff,woff2,ttf,eot}"]
   },
   "mimeTypes": {
     ".js": "text/javascript",
     ".mjs": "text/javascript",
     ".json": "application/json",
-    ".css": "text/css"
+    ".css": "text/css",
+    ".svg": "image/svg+xml",
+    ".png": "image/png",
+    ".jpg": "image/jpeg",
+    ".jpeg": "image/jpeg",
+    ".gif": "image/gif",
+    ".ico": "image/x-icon",
+    ".woff": "font/woff",
+    ".woff2": "font/woff2",
+    ".ttf": "font/ttf",
+    ".eot": "application/vnd.ms-fontobject"
   },
   "globalHeaders": {
-    "content-security-policy": "default-src 'self' 'unsafe-inline' 'unsafe-eval' https: data: blob:;",
-    "X-Content-Type-Options": "nosniff"
+    "Cache-Control": "public, max-age=31536000, immutable"
   },
   "routes": [
     {
-      "route": "/*",
+      "route": "/assets/*",
       "headers": {
-        "cache-control": "no-cache"
+        "Cache-Control": "public, max-age=31536000, immutable"
       }
     }
-  ]
+  ],
+  "platform": {
+    "apiRuntime": "node:18"
+  }
 }
