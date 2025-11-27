@@ -36,18 +36,17 @@ jobs:
           npm run build
           cp staticwebapp.config.json dist/ || true
       
-      - name: Build And Deploy
+      - name: Deploy to Azure Static Web Apps
         id: builddeploy
         uses: Azure/static-web-apps-deploy@v1
         with:
-          azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_ZEALOUS_DESERT_09F06490F }}
+          azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN }}
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
           action: "upload"
           skip_app_build: true
-          app_location: "frontend" 
-          api_location: "" 
-          app_artifact_location: "dist"
-          output_location: "build" 
-          github_id_token: ${{ steps.idtoken.outputs.result }}              
+          app_location: "./frontend/dist"
+          api_location: ""
+          output_location: ""         
 
   close_pull_request_job:
     if: github.event_name == 'pull_request' && github.event.action == 'closed'
@@ -60,5 +59,6 @@ jobs:
         with:
           azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_JOLLY_HILL_08B593910 }}
           action: "close"
+
 
 
